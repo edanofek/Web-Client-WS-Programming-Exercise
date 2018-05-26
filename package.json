@@ -1,0 +1,22 @@
+{
+  "name": "node-draw-ws-project",
+  "version": "1.0.0",
+  "description": "Node Draw WS Project Client / Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "WebSockets",
+    "Drawing",
+    "Server",
+    "client"
+  ],
+  "author": "Idan Ofek",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "rimraf": "^2.6.2"
+  }
+}
