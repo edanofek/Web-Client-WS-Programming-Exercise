@@ -1,1 +1,16 @@
-node_modules/
+settings/*
+bin/*
+.classpath
+*.classpath
+*.project
+*.idea
+*.vscode
+.vscode
+.idea
+.xml
+.json
+.project
+*.class
+*/.settings
+.settings
+node_modules/*
