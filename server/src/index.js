@@ -1,9 +1,12 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var path = require('path');
+
+var defaultPort = 3000;
 
 app.get('/', function(req, res) { 
-   res.sendFile('../../client/src/index.html');
+    res.sendFile(path.resolve('../../client/src/index.html'));
 });
 
 //Whenever someone connects this gets executed
@@ -16,6 +19,6 @@ io.on('connection', function(socket) {
     });
  });
  
- http.listen(3000, function() {
-    console.log('listening on *:3000');
+ http.listen(defaultPort, function() {
+    console.log(`listening on *:${defaultPort}`);
  });
