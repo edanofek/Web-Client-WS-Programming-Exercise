@@ -2,13 +2,14 @@
   "name": "node-draw-ws-project",
   "version": "1.0.0",
   "description": "Node Draw WS Project Client / Server",
-  "main": "index.js",
+  "main": "./server/src/index.js",
   "scripts": {
     "test": "test"
   },
   "keywords": [
     "WebSockets",
     "Drawing",
+    "Canvas",
     "Server",
     "client"
   ],
