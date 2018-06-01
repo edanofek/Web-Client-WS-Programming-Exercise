@@ -14,3 +14,4 @@ bin/*
 */.settings
 .settings
 node_modules/*
+bower_components/*
