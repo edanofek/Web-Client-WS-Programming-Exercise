@@ -1,23 +1,26 @@
 {
-  "name": "node-draw-ws-project",
+  "name": "web-client-ws",
   "version": "1.0.0",
-  "description": "Node Draw WS Project Client / Server",
-  "main": "./server/src/index.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "test": "test"
+    "start": "nodemon src/server/index.js",
+    "webpack": "./node_modules/.bin/webpack -w",
+    "test": "mocha --compilers babel-core/register ./test/*test.js"
   },
-  "keywords": [
-    "WebSockets",
-    "Drawing",
-    "Canvas",
-    "Server",
-    "client"
-  ],
-  "author": "Idan Ofek",
-  "license": "MIT",
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
-    "rimraf": "^2.6.2"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edanofek/Web-Client-WS-Programming-Exercise.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edanofek/Web-Client-WS-Programming-Exercise/issues"
+  },
+  "homepage": "https://github.com/edanofek/Web-Client-WS-Programming-Exercise#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0"
   }
 }
