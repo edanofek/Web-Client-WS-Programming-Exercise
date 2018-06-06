@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class DrawerInputFiled extends Component {
+class DrawerInputField extends Component {
 
     constructor(props) {
       super(props);
@@ -15,15 +15,16 @@ class DrawerInputFiled extends Component {
       //TODO:Con't here
   
       return 
-        <input type='text' name='title' value='Mr.' />
+        <input type='text' name='title' value='' />
       ;
+
     }
   }
   
-  CanvasDraw.propTypes ={
+  DrawerInputField.propTypes ={
     lockedForUsage:PropTypes.bool,
     id:propTypes.number,
     // drawerName:
   };
   
-  export default DrawerInputFiled;
+  export default DrawerInputField;
