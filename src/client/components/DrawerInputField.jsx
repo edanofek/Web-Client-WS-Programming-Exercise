@@ -1,4 +1,4 @@
-import React, { Component/*,PropTypes*/ } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class DrawerInputField extends Component {
@@ -6,7 +6,7 @@ class DrawerInputField extends Component {
     constructor(props) {
       super(props);
       this.state = {
-          total: 0
+          drawerName: ''
       };
     }
   
@@ -15,16 +15,15 @@ class DrawerInputField extends Component {
       //TODO:Con't here
   
       return 
-        <input type='text' name='title' value='' />
+        <input type='text' name='title' value={this.state.drawerName} />
       ;
 
     }
   }
   
-  DrawerInputField.propTypes ={
-    lockedForUsage:PropTypes.bool,
-    id:propTypes.number,
-    // drawerName:
+  DrawerInputField.PropTypes ={
+    id:PropTypes.number,
+    drawerName:PropTypes.string,
   };
   
   export default DrawerInputField;

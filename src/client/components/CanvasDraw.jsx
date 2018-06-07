@@ -1,7 +1,7 @@
-import React, { Component/*,PropTypes*/ } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import DrawerInputFiled from './DrawerInputField.jsx';
+import DrawerInputField from './DrawerInputField.jsx';
 
 class CanvasDraw extends Component {
 
@@ -15,15 +15,17 @@ class CanvasDraw extends Component {
   render() {
     
     //TODO:Con't here
+    return <div>
+      <DrawerInputField
+      />
+    </div>;
 
-    return <h2>drawer name</h2>;
   }
 }
 
-CanvasDraw.propTypes ={
-  lockedForUsage:PropTypes.bool,
-  id:propTypes.number,
-  // drawerName:
+CanvasDraw.PropTypes ={
+  lockedForUsage?:PropTypes.bool,
+  id?:PropTypes.number,
 };
 
 export default CanvasDraw;
