@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/edanofek/Web-Client-WS-Programming-Exercise#readme",
   "dependencies": {
+    "@types/prop-types": "^15.5.3",
     "express": "^4.16.3",
+    "prop-types": "^15.6.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0"
   }

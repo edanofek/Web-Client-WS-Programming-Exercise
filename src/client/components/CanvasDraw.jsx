@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component/*,PropTypes*/ } from 'react';
 import PropTypes from 'prop-types';
-import DrawerInputFiled from 'DrawerInputFiled';
+
+import DrawerInputFiled from './DrawerInputField.jsx';
 
 class CanvasDraw extends Component {
 

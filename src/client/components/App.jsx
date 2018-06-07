@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import CanvasDraw from 'CanvasDraw';
+// import ReactDOM from 'react-dom';
+import CanvasDraw from './CanvasDraw.jsx';
 
 
 class App extends Component {
