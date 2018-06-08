@@ -14,14 +14,13 @@ class DrawerInputField extends Component {
       
       //TODO:Con't here
   
-      return 
-        <input type='text' name='title' value={this.state.drawerName} />
+      return <input type='text' name='title' value={this.state.drawerName} />
       ;
 
     }
   }
   
-  DrawerInputField.PropTypes ={
+  DrawerInputField.propTypes ={
     id:PropTypes.number,
     drawerName:PropTypes.string,
   };

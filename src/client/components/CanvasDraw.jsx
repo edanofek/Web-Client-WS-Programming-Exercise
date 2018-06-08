@@ -23,9 +23,9 @@ class CanvasDraw extends Component {
   }
 }
 
-CanvasDraw.PropTypes ={
-  lockedForUsage?:PropTypes.bool,
-  id?:PropTypes.number,
+CanvasDraw.propTypes ={
+  lockedForUsage:PropTypes.bool,
+  id:PropTypes.number,
 };
 
 export default CanvasDraw;
