@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import DrawerInputFiled from './DrawerInputField.jsx';
 import DrawerInputField from './DrawerInputField.jsx';
+import ClearCanvasBtn from './ClearCanvasBtn.jsx';
 
 class CanvasDraw extends Component {
 
@@ -14,13 +14,21 @@ class CanvasDraw extends Component {
 
   render() {
     
-    //TODO:Con't here
-    return <div>
+    return <div className="CanvasDraw">
+      <canvas className="cavansBase"/>
       <DrawerInputField
+        id={1}
+        drawerName={'DrawerInputField'}
       />
+      {/*
+      <ClearCanvasBtn
+        
+      />
+      */}
     </div>;
 
   }
+
 }
 
 CanvasDraw.propTypes ={
