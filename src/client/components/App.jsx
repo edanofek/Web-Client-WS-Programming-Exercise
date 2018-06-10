@@ -5,14 +5,24 @@ import CanvasDraw from './CanvasDraw.jsx';
 
 class App extends Component {
   render() {
-    return <div>
-        <div>
+    return <div className="row">
+        <div className="col3d">
           <CanvasDraw/>
         </div>
-        <div>
+        <div className="col3d">
           <CanvasDraw/>
         </div>
-        <div>
+        <div className="col3d">
+          <CanvasDraw/>
+        </div>
+        <div/>
+        <div className="row">
+          <CanvasDraw/>
+        </div>
+        <div className="col3d">
+          <CanvasDraw/>
+        </div>
+        <div className="col3d">
           <CanvasDraw/>
         </div>
       </div>
