@@ -10,10 +10,15 @@ class ClearCanvasBtn extends Component {
         };
     }
     
+    
+    clearButtonHandler(){
+        console.info("clearButtonHandler");
+    }
+
     render() {
         
         return <div className="ClearCanvasBtn">
-           ClearCanvasBtn
+           <button onClick={this.clearButtonHandler.bind(this)}>Clear button</button>
         </div>;
     
     }

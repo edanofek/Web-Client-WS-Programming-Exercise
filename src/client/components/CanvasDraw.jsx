@@ -17,14 +17,14 @@ class CanvasDraw extends Component {
     return <div className="CanvasDraw">
       <canvas className="cavansBase"/>
       <DrawerInputField
-        id={1}
+        id={this.props.id}
         drawerName={'DrawerInputField'}
       />
-      {/*
+      
       <ClearCanvasBtn
-        
+        id={this.props.id}  
       />
-      */}
+      
     </div>;
 
   }
