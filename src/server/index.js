@@ -10,15 +10,14 @@ app.get('/', function(req, res) {
 
 
 app.get('/image/:imageID', function(req, res) {
-    fs.readFile('/assets/backdraw_'+req.params['imageID']+'.png',function(err,data){
+    fs.readFile(path.resolve('./assets/backdraw_'+req.params['imageID']+'.png'),function(err,data){
         try{
 
             if (err) {
                 return console.error(err);
             }
-            console.info(data);
-
-            res.json(data);
+            
+            res.send(data);
 
         }catch(e){
             console.error(e);
