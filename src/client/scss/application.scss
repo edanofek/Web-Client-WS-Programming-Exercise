@@ -15,10 +15,16 @@ body {
 }
 
 .cavansBase{
+  float: left;
   width: 200px;
   height: 200px;
 }
 
 .clearBtn{
+  float: left;
   border: radius 5;
+}
+
+.DrawerInputField{
+  float: left;
 }
