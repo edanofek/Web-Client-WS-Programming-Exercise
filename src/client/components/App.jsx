@@ -7,25 +7,25 @@ class App extends Component {
     return <div className="container">
         <div className="row">
           <div className="col3rd">
-            <CanvasDraw/>
+            <CanvasDraw id={1}/>
           </div>
           <div className="col3rd">
-            <CanvasDraw/>
+            <CanvasDraw id={2}/>
           </div>
           <div className="col3rd">
-            <CanvasDraw/>
+            <CanvasDraw id={3}/>
           </div>
         </div>
         <div/>
         <div className="row">
           <div className="col3rd">
-            <CanvasDraw/>
+            <CanvasDraw id={4}/>
           </div>
           <div className="col3rd">
-            <CanvasDraw/>
+            <CanvasDraw id={5}/>
           </div>
           <div className="col3rd">
-            <CanvasDraw/>
+            <CanvasDraw id={6}/>
           </div>
         </div>
       </div>

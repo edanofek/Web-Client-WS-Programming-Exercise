@@ -12,7 +12,7 @@ class DrawerInputField extends Component {
   
     render() {
       
-      return <input type='text' name={'title_'+this.props.id} value={this.state.drawerName} />
+      return <input className="DrawerInputField" type='text' name={'title_'+this.props.id} value={this.state.drawerName} />
       ;
 
     }
