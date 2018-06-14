@@ -24,6 +24,13 @@ class CanvasDraw extends Component {
     };
     imageObj.src = 'http://localhost:'+processNumber+'/image/'+this.props.id; 
  
+    canvas.addEventListener("mousemove",function(e){
+      //TODO:Con't here
+      if(paint){
+        addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+        redraw();
+      }
+    });
   }
 
   render() {
