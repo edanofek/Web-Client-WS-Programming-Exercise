@@ -19,15 +19,16 @@ class CanvasDraw extends Component {
     let context = canvas.getContext('2d');
     let imageObj = new Image();
 
+    let clickX = new Array();
+    let clickY = new Array();
+    let clickDrag = new Array();
+    let paint;
+
     imageObj.onload = function() {
       context.drawImage(imageObj, 0, 0);
     };
     imageObj.src = 'http://localhost:'+processNumber+'/image/'+this.props.id; 
 
-    let clickX = new Array();
-    let clickY = new Array();
-    let clickDrag = new Array();
-    let paint;
  
     canvas.addEventListener("mousedown",function(e){
       var mouseX = e.pageX - this.offsetLeft;
@@ -37,15 +38,14 @@ class CanvasDraw extends Component {
       addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
       redraw();
     });
+
     canvas.addEventListener("mousemove",function(e){
       if(paint){
         addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
         redraw();
       }
     });
-    canvas.addEventListener("mousedown",function(e){
-      paint = false;
-    });
+    
     canvas.addEventListener("mouseleave",function(e){
       paint = false;
     });
@@ -58,7 +58,6 @@ class CanvasDraw extends Component {
     }
 
     function redraw(){
-      context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
       
       context.strokeStyle = "#df4b26";
       context.lineJoin = "round";
@@ -80,7 +79,7 @@ class CanvasDraw extends Component {
   }
 
   render() {
-    
+
     return <div className="CanvasDraw">
       <div>
         <canvas className="cavansBase"
