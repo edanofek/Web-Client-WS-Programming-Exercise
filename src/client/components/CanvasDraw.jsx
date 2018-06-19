@@ -2,80 +2,38 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DrawerInputField from './DrawerInputField.jsx';
 import ClearCanvasBtn from './ClearCanvasBtn.jsx';
+import CanvasLogic from '../js/CanvasLogic.js'
 
 class CanvasDraw extends Component {
 
   constructor(props) {
+
     super(props);
     this.state = {
-        
+      
     };
+
+    this.canvasLogic = null;
+    
+    this.imageObj = new Image();
+
   }
 
   componentDidMount(){
     
-    const widthHeight = 200,processNumber = 3000;
+    const protNumber = 3000;
     let canvas = document.getElementById('canvasDraw_'+this.props.id);
     let context = canvas.getContext('2d');
-    let imageObj = new Image();
-
-    let clickX = new Array();
-    let clickY = new Array();
-    let clickDrag = new Array();
-    let paint;
-
-    imageObj.onload = function() {
-      context.drawImage(imageObj, 0, 0);
-    };
-    imageObj.src = 'http://localhost:'+processNumber+'/image/'+this.props.id; 
-
- 
-    canvas.addEventListener("mousedown",function(e){
-      var mouseX = e.pageX - this.offsetLeft;
-      var mouseY = e.pageY - this.offsetTop;
-        
-      paint = true;
-      addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
-      redraw();
-    });
-
-    canvas.addEventListener("mousemove",function(e){
-      if(paint){
-        addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
-        redraw();
-      }
-    });
     
-    canvas.addEventListener("mouseleave",function(e){
-      paint = false;
-    });
+    let self = this;
+    this.imageObj.onload = function() {
+      context.drawImage(self.imageObj, 0, 0);
+    };
+    this.imageObj.src = 'http://localhost:'+protNumber+'/image/'+this.props.id; 
 
-    function addClick(x, y, dragging)
-    {
-      clickX.push(x);
-      clickY.push(y);
-      clickDrag.push(dragging);
-    }
-
-    function redraw(){
-      
-      context.strokeStyle = "#df4b26";
-      context.lineJoin = "round";
-      context.lineWidth = 5;
-          
-      for(var i=0; i < clickX.length; i++) {		
-        context.beginPath();
-        if(clickDrag[i] && i){
-          context.moveTo(clickX[i-1], clickY[i-1]);
-         }else{
-           context.moveTo(clickX[i]-1, clickY[i]);
-         }
-         context.lineTo(clickX[i], clickY[i]);
-         context.closePath();
-         context.stroke();
-      }
-    }
-
+    this.canvasLogic = new CanvasLogic(canvas);
+    this.canvasLogic.logicDrawingInit(); //create and handle canvas drawing logic
+    
   }
 
   render() {
@@ -93,12 +51,19 @@ class CanvasDraw extends Component {
         <br/>
         <ClearCanvasBtn
           id={this.props.id}  
+          clearCanvasDrawing={this.clearCanvasDrawing.bind(this)}
         />
       </div>
     </div>;
 
   }
 
+  clearCanvasDrawing(){
+
+    this.canvasLogic.logicClearCanvas(); //clear canvas drawing
+    this.canvasLogic.logicSetImage(this.imageObj);
+    this.canvasLogic.logicDrawingInit(); //create and handle canvas drawing logic
+  }
 }
 
 CanvasDraw.propTypes ={

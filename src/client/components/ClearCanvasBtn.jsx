@@ -12,7 +12,8 @@ class ClearCanvasBtn extends Component {
     
     
     clearButtonHandler(){
-        console.info("clearButtonHandler");
+        // console.info("clearButtonHandler");
+        this.props.clearCanvasDrawing();
     }
 
     render() {
@@ -26,6 +27,7 @@ class ClearCanvasBtn extends Component {
 
 ClearCanvasBtn.propTypes ={
     id:PropTypes.number,
+    clearCanvasDrawing:PropTypes.func,
   };
   
   export default ClearCanvasBtn;

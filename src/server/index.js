@@ -2,6 +2,10 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var fs = require('fs');
+
+var http = require('http');
+var socketIo = require('socket.io');
+
 var browserPort = 3000;
 
 app.get('/', function(req, res) { 
@@ -26,5 +30,10 @@ app.get('/image/:imageID', function(req, res) {
     
 }); 
 
+var server = http.createServer(app);
+var io = socketIo.listen(server);
+server.listen(browserPort);
 app.use('/build',express.static(path.resolve('../../build/')));
-app.listen(browserPort); //listens on port 3000 -> http://localhost:3000/
+console.log("Server running on 127.0.0.1:"+browserPort);
+//listens on port 3000 -> http://localhost:3000/
+
