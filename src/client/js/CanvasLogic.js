@@ -63,6 +63,7 @@ class CanvasLogic {
                 context.stroke();
             }
         }
+        
     }
 
     logicClearCanvas(){

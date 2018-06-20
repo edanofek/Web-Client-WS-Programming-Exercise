@@ -10,7 +10,7 @@ class CanvasDraw extends Component {
 
     super(props);
     this.state = {
-      
+      allowDrawing:false
     };
 
     this.canvasLogic = null;
