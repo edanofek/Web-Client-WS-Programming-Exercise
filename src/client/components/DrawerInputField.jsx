@@ -12,15 +12,30 @@ class DrawerInputField extends Component {
   
     render() {
       
-      return <input className="DrawerInputField" type='text' name={'title_'+this.props.id} value={this.state.drawerName} />
+      return <input className="DrawerInputField" type='text' 
+        name={'title_'+this.props.id} value={this.state.drawerName}
+        onChange={this.onDrawingNameChange.bind(this)}
+         />
       ;
 
     }
+
+    onDrawingNameChange(e){
+      
+      this.setState({
+        drawerName:e.target.value
+      });
+
+      this.props.onDrawingNameChange(e.target.value);
+    }
+
   }
+
   
   DrawerInputField.propTypes ={
     id:PropTypes.number,
     drawerName:PropTypes.string,
+    onDrawingNameChange:PropTypes.func,
   };
   
   export default DrawerInputField;

@@ -16,10 +16,18 @@ body {
   float: left;
 }
 
-.cavansBase{
-  
+
+.canvasBase{
   width: 200px;
   height: 200px;
+}
+
+.showCanvasRedBorder{
+  outline: 1px solid red;
+}
+
+.showCanvasClearBorder{
+  outline: 0px solid red;
 }
 
 .clearBtn{

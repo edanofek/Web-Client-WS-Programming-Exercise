@@ -10,7 +10,7 @@ class CanvasDraw extends Component {
 
     super(props);
     this.state = {
-      allowDrawing:false
+      showCanvasRedBorder:false
     };
 
     this.canvasLogic = null;
@@ -28,6 +28,7 @@ class CanvasDraw extends Component {
     let self = this;
     this.imageObj.onload = function() {
       context.drawImage(self.imageObj, 0, 0);
+      context.save();
     };
     this.imageObj.src = 'http://localhost:'+protNumber+'/image/'+this.props.id; 
 
@@ -40,13 +41,17 @@ class CanvasDraw extends Component {
 
     return <div className="CanvasDraw">
       <div>
-        <canvas className="cavansBase"
+        <canvas className={["canvasBase",
+        (this.state.showCanvasRedBorder ? 
+        "showCanvasRedBorder":
+        "showCanvasClearBorder")].join(' ')}
           id={"canvasDraw_"+this.props.id}
         />
         <br/>
         <DrawerInputField
           id={this.props.id}
           drawerName={'DrawerInputField'}
+          onDrawingNameChange={this.onDrawingNameChange.bind(this)}
         />
         <br/>
         <ClearCanvasBtn
@@ -62,8 +67,25 @@ class CanvasDraw extends Component {
 
     this.canvasLogic.logicClearCanvas(); //clear canvas drawing
     this.canvasLogic.logicSetImage(this.imageObj);
-    this.canvasLogic.logicDrawingInit(); //create and handle canvas drawing logic
+    this.canvasLogic.logicDrawingInit(); //create and handle canvas drawing logiconDrawingNameChange
+
   }
+  
+  onDrawingNameChange(value){
+    
+    //TODO:fill this area with
+    //input and change the border canvas border color
+
+    this.canvasLogic.freeDrawing((value.length > 0));
+
+    this.setState({
+      showCanvasRedBorder : (value.length > 0)
+    });
+
+    //console.info(value);
+
+  }
+
 }
 
 CanvasDraw.propTypes ={
