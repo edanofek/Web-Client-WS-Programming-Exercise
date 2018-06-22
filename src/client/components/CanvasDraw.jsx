@@ -82,8 +82,7 @@ class CanvasDraw extends Component {
       showCanvasRedBorder : (value.length > 0)
     });
 
-    //console.info(value);
-
+    
   }
 
 }
