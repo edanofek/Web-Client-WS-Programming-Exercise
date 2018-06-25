@@ -1,9 +1,3 @@
-/*var drawingADT = function(){
-    //each line is holding canvas id,line history
-    var line_history = [{}]; //private ADT
-};
-*/
-
 var drawObject = function(){
     return{
         line:{},
@@ -13,7 +7,7 @@ var drawObject = function(){
 
 var line_history = []; //array with history of draw object
 
-var SocketLogic = function(socket){
+var SocketLogic = function(io,socket){
 
     //Actions we want to deploy :
     //1.Draw entire lines that alrady have been drawn (related to the entire canvases)
@@ -28,10 +22,13 @@ var SocketLogic = function(socket){
     }
 
     // add handler for message type "draw_line".
+    
     socket.on('draw_line', function (data) {
         // add received line to history 
         
         var _drawObject = new drawObject();
+        console.info(`canvas id : ${data.canvasID}`);
+
         _drawObject.canvasID = data.canvasID;
         _drawObject.line = {
             start:{
@@ -45,8 +42,9 @@ var SocketLogic = function(socket){
         };
         line_history.push(_drawObject);
         // send line to all clients
-        socket.emit('draw_line', { line: data.line });
+        io.emit('draw_line', { line: _drawObject });
     });
+    
 
 };
 

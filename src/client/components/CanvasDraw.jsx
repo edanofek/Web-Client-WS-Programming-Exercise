@@ -35,7 +35,6 @@ class CanvasDraw extends Component {
     this.canvasLogic = new CanvasLogic(canvas,this.props.id);
     this.canvasLogic.logicDrawingInit(); //create and handle canvas drawing logic
   
-
   }
 
   render() {

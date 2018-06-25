@@ -5,7 +5,7 @@ class CanvasLogic {
     
     constructor(canvasObject,canvasID){
         this.canvasObject = canvasObject;
-        this.canvasID = -1;
+        this.canvasID = canvasID;
         this.enableDrawing = false;
         this.clickX = new Array();
         this.clickY = new Array();
@@ -91,9 +91,11 @@ class CanvasLogic {
         }
 
         socket.on('draw_line',function(data){
-            if(this.canvasID === data.canvasID){
+            
+            console.info(data);
+            /*if(this.canvasID === data.canvasID){
                 console.info(data.canvasID);
-            }
+            }*/
         });
     }
 
