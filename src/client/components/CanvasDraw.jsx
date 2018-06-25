@@ -32,9 +32,10 @@ class CanvasDraw extends Component {
     };
     this.imageObj.src = 'http://localhost:'+protNumber+'/image/'+this.props.id; 
 
-    this.canvasLogic = new CanvasLogic(canvas);
+    this.canvasLogic = new CanvasLogic(canvas,this.props.id);
     this.canvasLogic.logicDrawingInit(); //create and handle canvas drawing logic
-    
+  
+
   }
 
   render() {

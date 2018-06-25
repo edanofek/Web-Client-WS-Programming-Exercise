@@ -1,9 +1,11 @@
+import openSocket from 'socket.io-client';
 
 class CanvasLogic {
     
     
-    constructor(canvasObject){
+    constructor(canvasObject,canvasID){
         this.canvasObject = canvasObject;
+        this.canvasID = -1;
         this.enableDrawing = false;
         this.clickX = new Array();
         this.clickY = new Array();
@@ -15,7 +17,8 @@ class CanvasLogic {
     logicDrawingInit(){
 
         let self = this;
-        
+        const socket = openSocket('http://localhost:3000');
+
         this.canvasObject.addEventListener("mousedown",function(e){
             var mouseX = e.pageX - this.offsetLeft;
             var mouseY = e.pageY - this.offsetTop;
@@ -68,11 +71,30 @@ class CanvasLogic {
                 context.moveTo(self.clickX[i]-1, self.clickY[i]);
                 }
                 context.lineTo(self.clickX[i], self.clickY[i]);
+                socket.emit('draw_line', {
+                    start:{
+                        x:self.clickX[i-1],
+                        y:self.clickY[i-1]
+                    },
+                    end:{
+                        x:self.clickX[i],
+                        y:self.clickY[i]
+
+                    },
+                    canvasID:self.canvasID
+                });
+
                 context.closePath();
                 context.stroke();
             }
             
         }
+
+        socket.on('draw_line',function(data){
+            if(this.canvasID === data.canvasID){
+                console.info(data.canvasID);
+            }
+        });
     }
 
     logicClearCanvas(){
@@ -96,4 +118,4 @@ class CanvasLogic {
 
 }
     
-  export default CanvasLogic;
+export default CanvasLogic;

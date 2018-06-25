@@ -32,15 +32,22 @@ app.get('/image/:imageID', function(req, res) {
 }); 
 
 var server = http.createServer(app);
+
 var io = socketIo.listen(server);
-
-io.on('connection', function (socket) {
-
-    // TODO:Con't here
-});
-
 server.listen(browserPort);
 app.use('/build',express.static(path.resolve('../../build/')));
+
+
 console.log("Server running on 127.0.0.1:"+browserPort);
 //listens on port 3000 -> http://localhost:3000/
 
+io.sockets.on('connection', function (socket) {
+
+    console.info("connection enabled");
+    socketLogic(socket);
+
+    socket.on('disconnect', function() {
+        console.log('Client disconnected.');
+    });
+
+});
