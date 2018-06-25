@@ -46,8 +46,4 @@ io.sockets.on('connection', function (socket) {
     console.info("connection enabled");
     socketLogic(io,socket);
 
-    socket.on('disconnect', function() {
-        console.log('Client disconnected.');
-    });
-
 });

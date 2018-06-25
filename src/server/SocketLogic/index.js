@@ -5,7 +5,7 @@ var drawObject = function(){
     };
 }
 
-var line_history = []; //array with history of draw object
+var line_history = new Array();; //init array - to store history of draw object
 
 var SocketLogic = function(io,socket){
 
@@ -30,7 +30,7 @@ var SocketLogic = function(io,socket){
         console.info(`canvas id : ${data.canvasID}`);
 
         _drawObject.canvasID = data.canvasID;
-        _drawObject.line = {
+        _drawObject = {
             start:{
                 x:data.start.x,
                 y:data.start.y
@@ -38,7 +38,8 @@ var SocketLogic = function(io,socket){
             end:{
                 x:data.end.x,
                 y:data.end.y
-            }
+            },
+            canvasID: data.canvasID
         };
         line_history.push(_drawObject);
         // send line to all clients
@@ -46,6 +47,12 @@ var SocketLogic = function(io,socket){
     });
     
 
+    socket.on('disconnect', function() {
+        console.log('Client disconnected.');
+        line_history = new Array();
+    });
 };
+
+
 
 module.exports = SocketLogic;

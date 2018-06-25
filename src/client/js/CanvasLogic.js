@@ -4,6 +4,7 @@ class CanvasLogic {
     
     
     constructor(canvasObject,canvasID){
+
         this.canvasObject = canvasObject;
         this.canvasID = canvasID;
         this.enableDrawing = false;
@@ -62,20 +63,27 @@ class CanvasLogic {
             context.strokeStyle = "#df4b26";
             context.lineJoin = "round";
             context.lineWidth = 5;
-            
+            let startObj = {};
+
             for(var i=0; i < self.clickX.length; i++) {		
                 context.beginPath();
             if(self.clickDrag[i] && i){
                 context.moveTo(self.clickX[i-1], self.clickY[i-1]);
+                startObj={
+                        x:self.clickX[i-1],
+                        y:self.clickY[i-1]
+                    };
                 }else{
                 context.moveTo(self.clickX[i]-1, self.clickY[i]);
+                startObj={
+                    x:self.clickX[i]-1,
+                    y:self.clickY[i]
+                };
+
                 }
                 context.lineTo(self.clickX[i], self.clickY[i]);
                 socket.emit('draw_line', {
-                    start:{
-                        x:self.clickX[i-1],
-                        y:self.clickY[i-1]
-                    },
+                    start:startObj,
                     end:{
                         x:self.clickX[i],
                         y:self.clickY[i]
@@ -92,10 +100,17 @@ class CanvasLogic {
 
         socket.on('draw_line',function(data){
             
-            console.info(data);
-            /*if(this.canvasID === data.canvasID){
-                console.info(data.canvasID);
-            }*/
+            if(self.canvasID === data.line.canvasID){
+                let context = self.canvasObject.getContext('2d');
+                context.strokeStyle = "#df4b26";
+                context.lineJoin = "round";
+                context.lineWidth = 5;
+                //draw on the canvas
+                context.moveTo(data.line.start.x, data.line.start.y);
+                context.lineTo(data.line.end.x, data.line.end.y);
+                context.closePath();
+                context.stroke();
+            }
         });
     }
 
