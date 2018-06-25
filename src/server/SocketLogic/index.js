@@ -27,8 +27,7 @@ var SocketLogic = function(io,socket){
         // add received line to history 
         
         var _drawObject = new drawObject();
-        console.info(`canvas id : ${data.canvasID}`);
-
+        
         _drawObject.canvasID = data.canvasID;
         _drawObject = {
             start:{
