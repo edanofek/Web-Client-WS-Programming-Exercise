@@ -16,13 +16,10 @@ var SocketLogic = function(io,socket){
 
       // first send the history to the new client
     for (var i in line_history) {
-        // console.info('let them know');
-        // console.info(line_history[i]);
+        
         socket.emit('draw_line', { line: line_history[i] } );
     }
 
-    // add handler for message type "draw_line".
-    
     socket.on('draw_line', function (data) {
         // add received line to history 
         
@@ -45,6 +42,7 @@ var SocketLogic = function(io,socket){
         io.emit('draw_line', { line: _drawObject });
     });
     
+    //socket.on('close the draw on canvas')
 
     socket.on('disconnect', function() {
         console.log('Client disconnected.');

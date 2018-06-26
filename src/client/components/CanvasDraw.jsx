@@ -73,16 +73,13 @@ class CanvasDraw extends Component {
   
   onDrawingNameChange(value){
     
-    //TODO:fill this area with
     //input and change the border canvas border color
-
     this.canvasLogic.freeDrawing((value.length > 0));
 
     this.setState({
       showCanvasRedBorder : (value.length > 0)
     });
 
-    
   }
 
 }
