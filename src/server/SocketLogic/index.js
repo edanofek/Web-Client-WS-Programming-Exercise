@@ -42,7 +42,14 @@ var SocketLogic = function(io,socket){
         io.emit('draw_line', { line: _drawObject });
     });
     
-    //socket.on('close the draw on canvas')
+    socket.on('DrawingMessage',function(data){
+        //TODO:Con't here - lock the cavnas 
+    });
+
+    socket.on('noLongerDrawingMessage',function(data){
+        //TODO:Free the canvas
+    });
+    
 
     socket.on('disconnect', function() {
         console.log('Client disconnected.');

@@ -8,6 +8,7 @@ class CanvasLogic {
         this.canvasObject = canvasObject;
         this.canvasID = canvasID;
         this.enableDrawing = false;
+        
         this.clickX = new Array();
         this.clickY = new Array();
         this.clickDrag = new Array();
@@ -15,21 +16,33 @@ class CanvasLogic {
 
     }
 
+    
     logicDrawingInit(){
 
         let self = this;
         const socket = openSocket('http://localhost:3000');
+        let timeout = undefined;
+
+        function timeoutFunction(){
+            self.paint = false;
+            socket.emit('noLongerDrawingMessage');
+        }
+
 
         this.canvasObject.addEventListener("mousedown",function(e){
             var mouseX = e.pageX - this.offsetLeft;
             var mouseY = e.pageY - this.offsetTop;
                 
-            if(self.enableDrawing === true){
+            if(self.enableDrawing === true && self.paint === false){
                 self.paint = true;
                 addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
+                socket.emit('DrawingMessage');
                 redraw(self.canvasObject);
+                timeout = setTimeout(timeoutFunction, 5000);
             }else{
                 self.paint = false;
+                clearTimeout(timeout);
+                timeout = setTimeout(timeoutFunction, 5000);
             }
             
         });
@@ -52,9 +65,11 @@ class CanvasLogic {
         });
     
         function addClick(x, y, dragging){
+
             self.clickX.push(x);
             self.clickY.push(y);
             self.clickDrag.push(dragging);
+
         }
         
         function redraw(canvasObject){
