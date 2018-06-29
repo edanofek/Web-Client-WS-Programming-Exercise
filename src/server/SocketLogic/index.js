@@ -43,7 +43,7 @@ var SocketLogic = function(io,socket){
     });
     
     socket.on('DrawingMessage',function(data){
-        //TODO:Con't here - lock the cavnas for drawing
+        //TODO:Con't here - lock the cavnas for drawing 
     });
 
     socket.on('noLongerDrawingMessage',function(data){
