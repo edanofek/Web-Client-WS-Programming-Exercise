@@ -38,8 +38,8 @@ var SocketLogic = function(io,socket){
             canvasID: data.canvasID
         };
         line_history.push(_drawObject);
-        // send line to all clients
-        io.emit('draw_line', { line: _drawObject });
+        // send line to all clients ,beside sender
+        socket.emit('draw_line', { line: _drawObject });
     });
     
     socket.on('DrawingMessage',function(data){
