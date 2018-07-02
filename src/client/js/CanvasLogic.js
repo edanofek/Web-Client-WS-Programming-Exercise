@@ -2,11 +2,11 @@ import openSocket from 'socket.io-client';
 
 class CanvasLogic {
     
-    
     constructor(canvasObject,canvasID){
 
         this.canvasObject = canvasObject;
         this.canvasID = canvasID;
+        this.drawerName = undefined;
         this.enableDrawing = false;
         
         this.clickX = new Array();
@@ -16,18 +16,14 @@ class CanvasLogic {
 
     }
 
-    
+    setDrawerName(drawerName){
+        this.drawerName = drawerName;
+    }
+
     logicDrawingInit(){
 
         let self = this;
         const socket = openSocket('http://localhost:3000');
-        let timeout = undefined;
-
-        function timeoutFunction(){
-            self.paint = false;
-            socket.emit('noLongerDrawingMessage');
-        }
-
 
         this.canvasObject.addEventListener("mousedown",function(e){
             var mouseX = e.pageX - this.offsetLeft;
@@ -36,13 +32,9 @@ class CanvasLogic {
             if(self.enableDrawing === true && self.paint === false){
                 self.paint = true;
                 addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
-                socket.emit('DrawingMessage');
                 redraw(self.canvasObject);
-                timeout = setTimeout(timeoutFunction, 5000);
             }else{
                 self.paint = false;
-                clearTimeout(timeout);
-                timeout = setTimeout(timeoutFunction, 5000);
             }
             
         });
@@ -104,7 +96,8 @@ class CanvasLogic {
                         y:self.clickY[i]
 
                     },
-                    canvasID:self.canvasID
+                    canvasID:self.canvasID,
+                    drawerName:self.drawerName
                 });
 
                 context.closePath();
@@ -115,6 +108,8 @@ class CanvasLogic {
 
         socket.on('draw_line',function(data){
             
+            //lock the canvas for draw on the client (not sender canvas)
+            //re-lock the canvas after 5 
             if(self.canvasID === data.line.canvasID){
                 let context = self.canvasObject.getContext('2d');
                 context.strokeStyle = "#df4b26";
@@ -125,7 +120,21 @@ class CanvasLogic {
                 context.lineTo(data.line.end.x, data.line.end.y);
                 context.closePath();
                 context.stroke();
+                
+
+                //1.Draw background around the canvas
+                socket.emit('lock_canvas_for_drawing',{
+                    canvasID:self.canvasID,
+                    drawerName:data.line.drawerName
+                });
+                
+                
             }
+
+        });
+
+        socket.on('lock_canvas_for_drawing',function(data){
+            self.setEnableDrawing(false);
         });
     }
 
@@ -144,7 +153,7 @@ class CanvasLogic {
         context.drawImage(imageObj, 0, 0);
     }
 
-    freeDrawing(status){
+    setEnableDrawing(status){
         this.enableDrawing = status;
     }
 

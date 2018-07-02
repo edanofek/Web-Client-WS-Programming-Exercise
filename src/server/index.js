@@ -43,7 +43,6 @@ console.log("Server running on 127.0.0.1:"+browserPort);
 
 io.sockets.on('connection', function (socket) {
 
-    console.info("connection enabled");
     socketLogic(io,socket);
 
 });

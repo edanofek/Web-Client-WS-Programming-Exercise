@@ -5,25 +5,27 @@ var drawObject = function(){
     };
 }
 
-var line_history = new Array();; //init array - to store history of draw object
+var line_history = new Array(); //init array - to store history of draw object
 
 var SocketLogic = function(io,socket){
 
     //Actions we want to deploy :
     //1.Draw entire lines that alrady have been drawn (related to the entire canvases)
     //2.Listen to draw lines reuqests from clients
-    //3.Before enable drawing - neee to check the entire 
+    //3.Before enable drawing - neee to check the that canvas is not in use
 
-      // first send the history to the new client
+    //send the history of drawing to the new client
     for (var i in line_history) {
         
         socket.emit('draw_line', { line: line_history[i] } );
+
     }
 
     socket.on('draw_line', function (data) {
         // add received line to history 
         
         var _drawObject = new drawObject();
+        
         
         _drawObject.canvasID = data.canvasID;
         _drawObject = {
@@ -35,28 +37,26 @@ var SocketLogic = function(io,socket){
                 x:data.end.x,
                 y:data.end.y
             },
-            canvasID: data.canvasID
+            canvasID: data.canvasID,
+            drawerName: data.drawerName
         };
         line_history.push(_drawObject);
         // send line to all clients ,beside sender
-        socket.emit('draw_line', { line: _drawObject });
-    });
-    
-    socket.on('DrawingMessage',function(data){
-        //TODO:Con't here - lock the cavnas for drawing
+        io.emit('draw_line', { line: _drawObject });
     });
 
-    socket.on('noLongerDrawingMessage',function(data){
-        //TODO:Free the canvas
+    
+    socket.on('lock_canvas_for_drawing',function(data){
+        io.emit('lock_canvas_for_drawing',{
+            canvasID:data.canvasID,
+            drawerName:data.drawerName
+        });
     });
     
-
     socket.on('disconnect', function() {
         console.log('Client disconnected.');
         line_history = new Array();
     });
 };
-
-
 
 module.exports = SocketLogic;
